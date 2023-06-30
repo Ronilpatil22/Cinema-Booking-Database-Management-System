@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,21 +7,15 @@
   {% load static %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style-starter.css' %}">
-  <link rel="stylesheet" href="{% static 'https://npmcdn.com/flickity@2/dist/flickity.css' %}">
+  <link rel="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/progress.css' %}">
-
   <link rel="stylesheet" type="text/css" href="{% static 'css/ticket-booking.css' %}">
-
-  <!-- ..............For progress-bar............... -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/e-ticket.css' %}">
-
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/payment.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/payment.css' %}" />
   <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700" rel="stylesheet">
 </head>
-
 <body>
   <header id="site-header" class="w3l-header fixed-top">
-
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
       <div class="container">
@@ -88,9 +81,9 @@
           <form id="form">
             <ul id="progressbar" class="progressbar-class">
               <li class="active" id="step1">Show timing selection</li>
-              <li id="step2" class="not_active">Seat Selection</li>
-              <li id="step3" class="not_active">Payment</li>
-              <li id="step4" class="not_active">E-Ticket</li>
+              <li id="step2" class="not_active">Payment</li>
+              <li id="step3" class="not_active">E-Ticket</li>
+              <li id="step4" class="not_active">BookYourMeal</li>
             </ul>
             <br>
             <fieldset>
@@ -133,10 +126,9 @@
                       Screen 1
                     </div>
                     <div class="time-btn">
-                        <button class="screen-time" type="submit" onclick="timeFunction()">
-                          1:05 PM
-                        </button>
-                      </form>
+                      <button class="screen-time" onclick="timeFunction()">
+                        1:05 PM
+                      </button>
                       <button class="screen-time" onclick="timeFunction()">
                         4:00 PM
                       </button>
@@ -219,19 +211,6 @@
                 disabled />
             </fieldset>
             <fieldset>
-
-              <div>
-                <iframe id="seat-sel-iframe"
-                  style="  box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
-                  src="seat_selection/seat_sel.html" action="/seat"></iframe>
-              </div>
-              <br>
-              <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
-              <input type="button" name="previous-step" class="previous-step" value="Back" />
-              <input type="hidden" name="price" id="price">
-            
-            </fieldset>
-            <fieldset>
               <!-- Payment Page -->
               <div id="payment_div">
                 <div class="payment-row">
@@ -251,10 +230,7 @@
                                 </div>
                                 <div class="radio-input">
                                   <input type="radio" id="card" />
-                                  <!-- Pay RS.200.00 with credit card -->
-                                  <p class="book-right">
-                                    FOR TICKETS <span id="count">0</span> PAY TOTAL RS <span id="total">0</span>
-                                  </p>
+                                  Pay RS.200.00 with credit card
                                 </div>
                               </label>
                             </div>
@@ -308,7 +284,7 @@
               </div>
               <input type="button" name="next-step" class="next-step pay-btn" value="Confirm Payment" />
               <input type="button" name="previous-step" class="cancel-pay-btn" value="Cancel Payment"
-                onclick="location.href='movies.html';" />
+                onclick="location.href='index.html';" />
             </fieldset>
             <fieldset>
               <h2>E-Ticket</h2>
@@ -316,7 +292,7 @@
                 <div class="ticket">
                   <div class="holes-top"></div>
                   <div class="title">
-                    <p class="cinema">CINEMASHOW </p>
+                    <p class="cinema">MyShowz Entertainment</p>
                     <p class="movie-title">Movie Name</p>
                   </div>
                   <div class="poster">
@@ -500,6 +476,11 @@
                   </div>
                 </div>
               </div>
+              <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Continue Booking"
+                disabled />
+              
+            </fieldset>
+            <fieldset>
               <input type="button" name="previous-step" class="home-page-btn" value="Browse to Home Page"
                 onclick="location.href='index.html';" />
             </fieldset>
@@ -524,96 +505,13 @@
     document.getElementById(prevId).style.background = "rgb(243, 235, 235)";
     document.getElementById(id).style.background = "#df0e62";
     prevId = id;
-  }
+  } 
 </script>
-
 <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
 <script type="text/javascript" src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
 </script>
 <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="{% static 'js/theme-change.js' %}"></script>
+<script src="{% static 'js/ticket-booking.js' %}"></script>
 
-<script type="text/javascript" src="{% static 'js/ticket-booking.js' %}"></script>
-<script type="text/javascript">
-  var price = 110; //price
-  $(document).ready(function () {
-    var $cart = $('#selected-seats'), //Sitting Area
-      $counter = $('#counter'), //Votes
-      $total = $('#total'); //Total money
-
-    var sc = $('#seat-map').seatCharts({
-      map: [ //Seating chart
-        'aaaaaaaaaa',
-        'aaaaaaaaaa',
-        '__________',
-        'aaaaaaaa__',
-        'aaaaaaaaaa',
-        'aaaaaaaaaa',
-        'aaaaaaaaaa',
-        'aaaaaaaaaa',
-        'aaaaaaaaaa',
-        '__aaaaaa__'
-      ],
-      naming: {
-        top: false,
-        getLabel: function (character, row, column) {
-          return column;
-        }
-      },
-      legend: { //Definition legend
-        node: $('#legend'),
-        items: [
-          ['a', 'available', 'Available'],
-          ['a', 'unavailable', 'Sold'],
-          ['a', 'selected', 'Selected']
-        ]
-      },
-      click: function () { //Click event
-        if (this.status() == 'available') { //optional seat
-          $('<li>R-' + (this.settings.row + 1) + '	S-' + this.settings.label + '</li>')
-            .attr('id', 'cart-item-' + this.settings.id)
-            .data('seatId', this.settings.id)
-            .appendTo($cart);
-
-          $counter.text(sc.find('selected').length + 1);
-          $total.text(recalculateTotal(sc) + price);
-
-          return 'selected';
-        } else if (this.status() == 'selected') { //Checked
-          //Update Number
-          $counter.text(sc.find('selected').length - 1);
-          //update totalnum
-          $total.text(recalculateTotal(sc) - price);
-
-          //Delete reservation
-          $('#cart-item-' + this.settings.id).remove();
-          //optional
-          return 'available';
-        } else if (this.status() == 'unavailable') { //sold
-          return 'unavailable';
-        } else {
-          return this.style();
-        }
-      }
-    });
-    //sold seat
-    sc.get(['1_2', '4_4', '4_5', '6_6', '6_7', '8_5', '8_6', '8_7', '8_8', '10_1', '10_2']).status(
-      'unavailable');
-
-  });
-  //sum total money
-  function recalculateTotal(sc) {
-    var total = 0;
-    sc.find('selected').each(function () {
-      total += price;
-    });
-
-    return total;
-  }
-  $('#date').val($('#timeFunction').html())
-  $('#time').val($('#myFunction(2)').html())
-  $('#price').val($('#total').html())
-  {% comment %} $('#date').val($('#timeFunction').html())
-  $('#date').val($('#timeFunction').html()) {% endcomment %}
-</script>
 </html>
