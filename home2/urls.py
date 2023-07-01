@@ -23,6 +23,5 @@ urlpatterns = [
     path('seat_sel.html', views.seat,name="seat"),
     path('seat', views.seat,name="seat"),
     path('book', views.book,name="book"),
-    
-    
+    path('paypal',views.paypal,name="paypal"),
 ]

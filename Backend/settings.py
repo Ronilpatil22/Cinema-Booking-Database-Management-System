@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -126,5 +128,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    'DBMS PROJECT FOLDER\Backend\Static'
+    'Cinema-Booking-Database-Management-System\Static'
 ]
+
+PAYPAL_TEST = True
+
+PAYPAL_RECIEVER_EMAIL = 'ronilnayna@gmail.com'

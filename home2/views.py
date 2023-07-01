@@ -5,7 +5,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import authenticate,login,logout
+from paypal.standard.forms import PayPalPaymentsForm
+from decimal import Decimal
+from django.conf import settings
+import uuid
+from django.urls import reverse
 # Create your views here.
+
 def movies(request):
     return render(request,'movies.html')
 
@@ -59,7 +65,7 @@ def handleSignup(request):
         
         # print(user.email)
         
-        messages.success(request, " Your CinemaShow account has been succesfully created ")
+        messages.success(request, " Your CineShow account has been succesfully created ")
         return redirect('login.html')
     
     
@@ -137,3 +143,21 @@ def book(request):
         if not User.is_authenticated:
             messages.warning(request,'Login to get your tickets on your whatsapp')
     return render(request,'ticket-booking.html')
+
+def paypal(request):
+    host = request.get_host()
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '10000.00',
+        'item_name': 'order',
+        'invoice': str(uuid.uuid4()),
+        'currency_code': 'INR',
+        'notify_url': f'http://{host}{reverse("paypal-ipn")}',
+        'return_url': f'http://{host}{reverse("paypal-reverse")}',
+        'cancel_return': f'http://{host}{reverse("paypal-canceled")}',
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {'form' : form}
+    return render(request,"paypal.html" ,context)
+

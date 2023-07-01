@@ -17,11 +17,12 @@ import os
 from django.contrib import admin
 from django.urls import path,include
 
-admin.site.site_header = "CINEMASHOW Admin"
-admin.site.site_title = "CINEMASHOW Admin Portal"
-admin.site.index_title = "Welcome to CINEMASHOW Researcher Portal"
+admin.site.site_header = "CINESHOW Admin"
+admin.site.site_title = "CINESHOW Admin Portal"
+admin.site.index_title = "Welcome to CINESHOW Researcher Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home2.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
 ]
