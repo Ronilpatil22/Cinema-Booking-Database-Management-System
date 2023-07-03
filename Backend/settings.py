@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Backend.urls'
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 TEMPLATES = [
     {
@@ -133,4 +136,4 @@ STATICFILES_DIRS = [
 
 PAYPAL_TEST = True
 
-PAYPAL_RECIEVER_EMAIL = 'ronilnayna@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'ronilnayna@gmail.com'

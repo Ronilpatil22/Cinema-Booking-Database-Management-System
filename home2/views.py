@@ -153,8 +153,8 @@ def paypal(request):
         'invoice': str(uuid.uuid4()),
         'currency_code': 'INR',
         'notify_url': f'http://{host}{reverse("paypal-ipn")}',
-        'return_url': f'http://{host}{reverse("paypal-reverse")}',
-        'cancel_return': f'http://{host}{reverse("paypal-canceled")}',
+        'return_url': f'http://{host}{reverse("book")}',
+        'cancel_return': f'http://{host}{reverse("home")}',
     }
 
     form = PayPalPaymentsForm(initial=paypal_dict)

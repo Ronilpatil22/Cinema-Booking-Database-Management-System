@@ -81,9 +81,9 @@
           <form id="form">
             <ul id="progressbar" class="progressbar-class">
               <li class="active" id="step1">Show timing selection</li>
-              <li id="step2" class="not_active">Payment</li>
-              <li id="step3" class="not_active">E-Ticket</li>
-              <li id="step4" class="not_active">BookYourMeal</li>
+              <li id="step2" class="not_active">Seat Selection</li>
+              <li id="step3" class="not_active">Paymeny</li>
+              <li id="step4" class="not_active">E-Ticket</li>
             </ul>
             <br>
             <fieldset>
@@ -211,6 +211,16 @@
                 disabled />
             </fieldset>
             <fieldset>
+              <div>
+                 <iframe id="seat-sel-iframe"
+                  style="  box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
+                  src="seat_sel.html"></iframe>
+              </div>
+              <br>
+              <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
+              <input type="button" name="previous-step" class="previous-step" value="Back" />
+            </fieldset>
+            <fieldset>
               <!-- Payment Page -->
               <div id="payment_div">
                 <div class="payment-row">
@@ -241,7 +251,7 @@
                                 </div>
                                 <div class="radio-input">
                                   <a href="paypal"><input id="paypal" type="radio">
-                                    Pay $30.00 with PayPal
+                                    Pay $<span id="total">0</span> with PayPal
                                   </a>
                                 </div>
                               </label>
@@ -481,13 +491,9 @@
                   </div>
                 </div>
               </div>
-              <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Continue Booking"
-                disabled />
-              
-            </fieldset>
-            <fieldset>
               <input type="button" name="previous-step" class="home-page-btn" value="Browse to Home Page"
                 onclick="location.href='index.html';" />
+              
             </fieldset>
           </form>
         </div>
@@ -518,5 +524,4 @@
 <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="{% static 'js/theme-change.js' %}"></script>
 <script src="{% static 'js/ticket-booking.js' %}"></script>
-
 </html>
