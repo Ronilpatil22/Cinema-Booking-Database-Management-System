@@ -13,6 +13,7 @@ from django.urls import reverse
 # Create your views here.
 
 def movies(request):
+
     return render(request,'movies.html')
 
 def home(request):

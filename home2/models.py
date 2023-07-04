@@ -29,7 +29,7 @@ class ticket(models.Model):
 
 class movie(models.Model):
     name=models.CharField(max_length=150)
-    time=models.TimeField()
+    runtime=models.TimeField()
     releasedate=models.DateField()
     about=models.CharField(max_length=5000)
     starcast=models.CharField(max_length=5000)
